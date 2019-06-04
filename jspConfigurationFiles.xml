@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configurationFilesAndDirectories>
+	<configurationFile type="web-xml">
+		<location>../WeatherDataApp_WAR/WEB-INF/web.xml</location>
+		<!-- for JSPs, only checks those within specified jspDirectory at a time -->
+		<jspDirectory>../WeatherDataApp_WAR</jspDirectory>
+		<jspDirectory>../WeatherDataApp_WAR/WEB-INF</jspDirectory>
+	</configurationFile>
+</configurationFilesAndDirectories>

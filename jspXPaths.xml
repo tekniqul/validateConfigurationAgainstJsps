@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configFiles>
+  	<web-xml>
+		<jspxPath>//jsp-file</jspxPath>
+		<ignorePackage/>
+  	</web-xml>
+</configFiles>

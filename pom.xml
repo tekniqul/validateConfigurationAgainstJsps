@@ -1,0 +1,133 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"   
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0   
+http://maven.apache.org/xsd/maven-4.0.0.xsd">  
+  
+<modelVersion>4.0.0</modelVersion>  
+  
+  <groupId>com.fortuitous.buildValidation</groupId>  
+  <artifactId>ValidateConfigAgainstJsps</artifactId>  
+  <version>1.0</version>  
+  <packaging>jar</packaging>
+
+  <properties>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  
+  <name>ValidateConfigAgainstJsps</name>  
+  <url>com.fortuitous.buildValidation.ValidateConfigAgainstJsps</url>  
+  
+  <dependencies>  
+    <dependency>
+       <groupId>commons-collections</groupId>
+       <artifactId>commons-collections</artifactId>
+       <version>3.2</version>
+    </dependency>
+    <dependency>
+       <groupId>commons-configuration</groupId>
+       <artifactId>commons-configuration</artifactId>
+       <version>1.10</version>
+    </dependency>
+    <dependency>
+       <groupId>commons-jxpath</groupId>
+       <artifactId>commons-jxpath</artifactId>
+       <version>1.3</version>
+    </dependency>
+    <dependency>
+       <groupId>commons-lang</groupId>
+       <artifactId>commons-lang</artifactId>
+       <version>2.6</version>
+    </dependency>
+    <dependency>
+       <groupId>commons-logging</groupId>
+       <artifactId>commons-logging</artifactId>
+       <version>1.2</version>
+    </dependency>
+    <dependency>
+       <groupId>org.jdom</groupId>
+       <artifactId>jdom2</artifactId>
+       <version>2.0.6</version>
+    </dependency>
+    <dependency>
+       <groupId>log4j</groupId>
+       <artifactId>log4j</artifactId>
+       <version>1.2.12</version>
+    </dependency>
+  </dependencies>  
+ 
+<build>
+  <finalName>ValidateConfigAgainstJsps</finalName>
+  <plugins>
+  <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-compiler-plugin</artifactId>
+      <version>2.3.2</version>
+      <configuration>
+         <source>${maven.compiler.source}</source>
+         <target>${maven.compiler.target}</target>
+      </configuration>
+   </plugin>
+   <plugin>
+       <groupId>org.apache.maven.plugins</groupId>
+       <artifactId>maven-jar-plugin</artifactId>
+       <version>3.1.2</version>
+       <configuration>
+           <archive>
+               <manifest>
+                   <addClasspath>true</addClasspath>
+                    <classpathPrefix>lib/</classpathPrefix>
+                    <mainClass>com.fortuitous.buildValidation.ValidateConfigAgainstJsps</mainClass>
+               </manifest>
+           </archive>
+       </configuration>
+        </plugin>
+<!-- copy the log4j.xml -->
+        <plugin>
+            <artifactId>maven-resources-plugin</artifactId>
+            <version>2.7</version>
+            <executions>
+                <execution>
+                    <id>copy-resource-one</id>
+                    <phase>install</phase>
+                    <goals>
+                        <goal>copy-resources</goal>
+                    </goals>
+                    <configuration>
+                        <outputDirectory>${maven.compiler.target}</outputDirectory>
+                        <resources>
+                            <resource>
+                                <directory>.</directory>
+                                <includes>
+                                    <include>log4j.xml</include>
+                                </includes>
+                            </resource>
+                        </resources>
+                    </configuration>
+                </execution>
+           </executions>
+        </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <executions>
+                <execution>
+                    <phase>install</phase>
+                    <goals>
+                        <goal>copy-dependencies</goal>
+                    </goals>
+                    <configuration>
+                        <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                        <!-- optional -->
+                        <!-- exclude copying test and provided dependencies -->
+                        <includeScope>runtime</includeScope>
+                        <excludeScope>provided</excludeScope>
+                        <!-- optional -->
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+</plugins>
+</build>
+</project>
